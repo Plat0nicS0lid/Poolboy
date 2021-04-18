@@ -1,0 +1,52 @@
+<!doctype html>
+
+<head><title>Poolboy</title>
+    <meta charset=utf-8>
+        <style>
+                table, th, td {
+                        border: 1px solid black;
+                        }
+        </style>
+</head>
+
+    <body>
+        <br>
+
+        <img src="/static/poolboy.png" alt="Poolboy">
+
+        <br>
+        <table>
+                <tr>
+                <th>Main Power</th>
+                </tr>
+                <tr>
+                <td>
+                <button> <a href="/my-link1/">Relais 1</a></button>
+                </td>
+                </tr>
+	</table>
+	<br>
+        <table>
+                <tr>
+                <th>Filtern</th>
+                <th>Heizen</th>
+                <th>Bubbles</th>
+                </tr>
+                <tr>
+                <td><button> <a href="/my-link2/">Relais 2</a></button></td>
+                <td><button> <a href="/my-link3/">Relais 3</a></button></td>
+                <td><button> <a href="/my-link4/">Relais 4</a></button></td>
+                </tr>
+        </table>
+
+
+	<br>
+<!--        <form action="/my-link/">
+            <input type="submit" value="Click me" />
+        </form>
+-->        
+        <button> <a href="/my-link1/">Relais 1</a></button>
+        <button> <a href="/my-link2/">Relais 2</a></button>
+        <button> <a href="/my-link3/">Relais 3</a></button>
+
+    </body>

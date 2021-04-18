@@ -1,0 +1,60 @@
+--- Work in Progress (maybe never finished...) ---
+
+This is the Poolboy repository. Poolboy was started based on a small overheated discussion between me and my neighbour. 
+As he was obsessed a bit that the filter pump of the Intex Pure Spa pool runs in the afternoon sometimes, I started thinking about a method how to control the pump a bit more automated and starting automatically during the workday hours. 
+I found out quite fast that the control options are not that easy as I expected after a first view. Stearing the buttons was quite easy. 
+But as soon as I reached the step to collect the state of the different devices (pump, jet, heater, etc.), I became aware that it is not that easy just to collect the LED state as all of this has a lot of high frequent blinking (several other projects are flying around this to use the 
+data line between the main and button board). As my plan is only to use very low budget electronic parts (resistors and some relais) I started based on the idea to use the button pins with a relais in parallel to simulate pressing the buttons and used the 12v relais on the main board that will be used to control the 230V pump for the filter.  
+That's it for the moment. 
+
+I had a not in use RasPi3 in my lid. So, I took that one as control unit. Together with a no longer in use 8 channel relais board, some resistors and another 12v relais that I used to collect the state of the filter pump, I started the project 'Pool Boy'. 
+
+First functionalities that 'version 1' should provide:
+- Together with Mr. Cron the filter pump should run automatically between 8am and 1pm.
+- In case someone manually started the pump or activated the heating, the automation has to check that someone did something manually.
+- In addition to the Cron jobs, a GUI should provide some functionalities to control the pool remotly.
+- THe GUI (web service) should start automatically with the RasPi start.
+
+
+For the first functionalities, two Python scripts (cronActions/filter_on.py and cronActions/filter_off.py) make sure that the filter pump will be (de-)activated. The scripts are containing some logic that make sure that the pump will be kept in running state in case that someone changed the states in between manually.
+Please add them to your cron service and decide yourself how often and when they should run.
+
+The second option will be provided via the Pure Spa logic on its own. I found out that the pool will not let me switch off the pump if the heating function is activated. 
+Basically, I expected that the heater would stop if I would press the pump button, but it works that way, that the board gives a 'I will not let you' tone and continues heating and filtering. The logic expects that the human first presses the heater button to stop heating, and than it will let me stop the filter pump. OK, that makes it more easy for me. My thinking was: 
+- Cron starts the filter pump at 8am
+- Someone starts the heater later
+- Cron will stop the filter pump at 1pm
+- My wife will be very angry about me that the water is not at 32 degrees celsius in the afternoon :)
+
+But in case the heater is running and 1pm filter off will be reached the board quits the virtual button press with 'I will not let you' and the heating process and filter pump are continuing.
+
+For the GUI I decided to use a web page. THe benefit is that every device in the network is able to control the pool via browser. 
+Instead of writing a mobile app or something Python based, a web application can be started via a browser on any mobile or PC.
+
+For the web part, I'm using flask for now - even if it says every time not to use it for any productive environment :). 
+As I'm still in dev stage, I will ignore that information.
+ 
+Next improvmemts for 'version 2' are to be able to see the water temperature, https and maybe to see some more states of the internal devices. 
+Also, an option to control the main fuse in front of the pool in case of a full power loss, etc. But all of this will come later.
+
+My apologies for any bad code. Please feel free to compress or modify where you think it makes sense for your environment. 
+At the moment, the Pool Boy project provides all I need. But this maybe will be seen totally different from your end. 
+Please feel free to get in contact in case you see any improvement inside the code.
+
+!!! Please be informed that I will not take over any waranty in case something will be damaged or in case something will not work as you expect it. 
+In case you'll use any script(s) of that project (or in parts) or something will become broken after opening the pool device, please don't come back to me.  !!!
+
+
+What you'll find in the repository:
+- poolboy.service file can be used to add the flask webservice to the systemd autostart
+- server.py is the python script that will be used by the poolboy service / flask web service
+- folder static contains the Pool Boy picture of the web page
+- folder templates contains the html page of the Pool Boy web page
+- folder cronActions contains the two scripts to activate and deactivate the filter pump
+- folder manualActions contains some scripts to start/stop the other functions of the button board
+- there are some older server version files. The current/last one, which is similar to server.py is the file server_v1.2.py
+- You are able to read these lines - so you found the README file ;)
+- the cron job scripts are logging to poolboy.log on the same folder level
+- the webpage server.py script should log also, but there are some issues with it at the moment
+
+

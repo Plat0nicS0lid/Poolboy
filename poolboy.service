@@ -1,0 +1,14 @@
+[Unit]
+Description=Poolboy web application
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/Poolboy
+Environment=FLASK_APP=server.py
+ExecStart=flask run --host=0.0.0.0
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
