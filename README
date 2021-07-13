@@ -2,14 +2,19 @@
 
 This is the Poolboy repository. Poolboy was started based on a small overheated discussion between me and my neighbour. 
 As he was obsessed a bit that the filter pump of the Intex Pure Spa pool runs in the afternoon sometimes, I started thinking about a method how to control the pump a bit more automated and starting automatically during the workday hours. 
-I found out quite fast that the control options are not that easy as I expected after a first view. Stearing the buttons was quite easy. 
-But as soon as I reached the step to collect the state of the different devices (pump, jet, heater, etc.), I became aware that it is not that easy just to collect the LED state as all of this has a lot of high frequent blinking (several other projects are flying around this to use the 
-data line between the main and button board). As my plan is only to use very low budget electronic parts (resistors and some relais) I started based on the idea to use the button pins with a relais in parallel to simulate pressing the buttons and used the 12v relais on the main board that will be used to control the 230V pump for the filter.  
-That's it for the moment. 
+I found out quite fast that the control options are not that easy as I expected after a first view. Stearing the buttons was an easy piece of cake. 
+But as soon as I reached the step to collect the state of the different devices (pump, jet, heater, etc.), I became aware that it is not that easy just to collect the LED state as all of them have different high frequent blinking frequencies (some other projects are flying around to use the data line between the main and button board). 
+In general, it sounds very exciting to replace the whole board with a total different one or to manipulate the datagram between the two board to control the whirlpool remotely. 
+But at the end, all of that is too much for my plans. So, I continued just with some soldered wires in parallel to the buttons. 
+As my plan is to use very low budget electronic parts (resistors and some relais), I started based on the idea to use the button pins with a relais in parallel to simulate pressing them. 
+THen I found out, that it is necessary to know that the filter pump is running to know when it is running or not. Otherwise it could happen, that the cron controlled times will be overwritten or "disturbed". Therefore, an extra 12v relais is necessary to pick up the filter pump state. 
+As a relais controls the 230V filter pump, powered with 12v, this voltage will be used to power that extra relais to get an potential free contact to "read" the power state of the filter pump. 
+That's it what needs to be connected to control everything (aside the temperature). Maybe there will be an extension to read the water temperature to add some kind of follow-up control of the heater. One thing I don´t like is, that the pump stops together with the heater if you power off the pool. That will increase the water temp inside the heater for several degrees. I don´t know if this really decreases the lifetime of the whole unit, but if the pump would run for one additional minute, the would cool down the heater a bit with the extra time the pump will run. But as the pool works for three years now, this is a very small "maybe...".
 
-I had a not in use RasPi3 in my lid. So, I took that one as control unit. Together with a no longer in use 8 channel relais board, some resistors and another 12v relais that I used to collect the state of the filter pump, I started the project 'Pool Boy'. 
+So, what did I use:
+I had a not in use RasPi3 in my lid. So, I took that one as control unit. Together with a 4 channel relais board, some resistors, a diode and one 12v relais that I used to collect the state of the filter pump, I started the project 'Poolboy'. 
 
-First functionalities that 'version 1' should provide:
+What are the Poolboy options:
 - Together with Mr. Cron the filter pump should run automatically between 8am and 1pm.
 - In case someone manually started the pump or activated the heating, the automation has to check that someone did something manually.
 - In addition to the Cron jobs, a GUI should provide some functionalities to control the pool remotly.
