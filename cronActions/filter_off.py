@@ -35,7 +35,7 @@ if FILTER_IS_ON:
 	GPIO.output(36,GPIO.HIGH)
 	# print("Relais 1 OFF! 36")
 	GPIO.cleanup()
-        f = open("poolboy.log","a")
+        f = open("/opt/Poolboy/cronActions/poolboy.log","a")
 	f.write(datetime.now().__str__())
         f.write(" filter_off - Filter is ON! Relais 2 / Filter will be switched off!")
 	f.write("\n")

@@ -35,7 +35,7 @@ if not FILTER_IS_ON:
 if FILTER_IS_ON:
 	# print("Filter is already ON! 31")
 	GPIO.cleanup()
-        f = open("poolboy.log","a")
+        f = open("/opt/Poolboy/cronActions/poolboy.log","a")
 	f.write(datetime.now().__str__())
         f.write(" filter_on - Filter is already ON! Relais 2 / Filter will not be touched!")
 	f.write("\n")
