@@ -84,6 +84,10 @@ main power button - pin 38 -> connect to relais board, relais 2
 filter pump button - pin 36 -> connect to relais board, relais 3
 heater button - pin 32 -> connect to relais board, relais 4
 
+How to manage Poolbpy via browser:
+The poolboy.service starts flask that way, that remote connections via port 80 are allowed. The port will be configured in poolboy.service line 9. 
+Yes - no https, no certificate - not yet. Please start the webpage with http://yourIPorNAME. In case port 80 is in use already, modify the service file, restart the service.
+
 Furthermore, connect the relais board to 3,3v, 5v and ground to power and control the relais board.
 
 Last step, connect pin 31 via a pull-down circuit with the n/c contact of the 12v relais which will be powered via the relais that controls the heater circuit of the pool unit main board. Please not use or connect the 230v contacts of that relais. You need to use the 12v contacts which are powering the relais!!! Just to make it clear one more time.
