@@ -31,11 +31,11 @@ def index():
 def my_link1():
   print ('Main Power got clicked!')
   GPIO.setmode(GPIO.BOARD)
-  GPIO.setup(32,GPIO.OUT)
-  GPIO.output(32,GPIO.LOW)
+  GPIO.setup(38,GPIO.OUT)
+  GPIO.output(38,GPIO.LOW)
   print("Relais 1 ON !")
   time.sleep(0.5)
-  GPIO.output(32,GPIO.HIGH)
+  GPIO.output(38,GPIO.HIGH)
   print("Relais 1 OFF !")
   filterstat = 31
   buttonSts = GPIO.LOW
@@ -74,11 +74,11 @@ def my_link2():
 def my_link3():
   print ('Heizen got clicked!')
   GPIO.setmode(GPIO.BOARD)
-  GPIO.setup(38,GPIO.OUT)
-  GPIO.output(38,GPIO.LOW)
+  GPIO.setup(32,GPIO.OUT)
+  GPIO.output(32,GPIO.LOW)
   print("Relais 3 ON !")
   time.sleep(0.5)
-  GPIO.output(38,GPIO.HIGH)
+  GPIO.output(32,GPIO.HIGH)
   print("Relais 3 OFF !")
   filterstat = 31
   buttonSts = GPIO.LOW

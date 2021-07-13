@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 
 GPIO.setmode(GPIO.BOARD)  
+GPIO.setwarnings(False)
 
 FILTER = 31
 RUN_FILTER = 36
@@ -19,7 +20,7 @@ FILTER_IS_ON = GPIO.input(FILTER)
 if not FILTER_IS_ON:
 	# print("Filter is already OFF ! 31")
 	GPIO.cleanup()
-	f = open("poolboy.log","a")
+	f = open("/opt/Poolboy/cronActions/poolboy.log","a")
 	f.write(datetime.now().__str__())
 	#f.write(datetime.now().__str__() + "\n")
 	f.write(" filter_off - Filter is OFF! No need to switch off Relais 2 / Filter!")
