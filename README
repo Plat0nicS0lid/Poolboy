@@ -11,55 +11,89 @@ THen I found out, that it is necessary to know that the filter pump is running t
 As a relais controls the 230V filter pump, powered with 12v, this voltage will be used to power that extra relais to get an potential free contact to "read" the power state of the filter pump. 
 That's it what needs to be connected to control everything (aside the temperature). Maybe there will be an extension to read the water temperature to add some kind of follow-up control of the heater. One thing I don´t like is, that the pump stops together with the heater if you power off the pool. That will increase the water temp inside the heater for several degrees. I don´t know if this really decreases the lifetime of the whole unit, but if the pump would run for one additional minute, the would cool down the heater a bit with the extra time the pump will run. But as the pool works for three years now, this is a very small "maybe...".
 
-So, what did I use:
+So, what I used:
 I had a not in use RasPi3 in my lid. So, I took that one as control unit. Together with a 4 channel relais board, some resistors, a diode and one 12v relais that I used to collect the state of the filter pump, I started the project 'Poolboy'. 
 
-What are the Poolboy options:
-- Together with Mr. Cron the filter pump should run automatically between 8am and 1pm.
-- In case someone manually started the pump or activated the heating, the automation has to check that someone did something manually.
-- In addition to the Cron jobs, a GUI should provide some functionalities to control the pool remotly.
-- THe GUI (web service) should start automatically with the RasPi start.
+What are the Poolboy options I want to manage:
+- Together with cron the filter pump should run automatically between 8:30am and 3:30pm.
+- In case someone manually started the pump or activated the heating, the automation has to manage that someone did something manually before or in between.
+- In addition to the Cron jobs, a Web GUI should provide all functionalities to control the pool remotely from any pc or mobile device at home via browser.
+- The GUI (web service) should be available after any (re)start of the RasPi.
 
-
-For the first functionalities, two Python scripts (cronActions/filter_on.py and cronActions/filter_off.py) make sure that the filter pump will be (de-)activated. The scripts are containing some logic that make sure that the pump will be kept in running state in case that someone changed the states in between manually.
-Please add them to your cron service and decide yourself how often and when they should run.
+For the first functionalities, two Python scripts (cronActions/filter_on.py and cronActions/filter_off.py) make sure that the filter pump will be (de-)activated. 
+The scripts are containing some logic which make sure that the pump will be kept in running state in case that someone changed the states in between manually.
+Please feel free to add them to your cron service and decide yourself how often and when they should run.
 
 The second option will be provided via the Pure Spa logic on its own. I found out that the pool will not let me switch off the pump if the heating function is activated. 
-Basically, I expected that the heater would stop if I would press the pump button, but it works that way, that the board gives a 'I will not let you' tone and continues heating and filtering. The logic expects that the human first presses the heater button to stop heating, and than it will let me stop the filter pump. OK, that makes it more easy for me. My thinking was: 
-- Cron starts the filter pump at 8am
-- Someone starts the heater later
-- Cron will stop the filter pump at 1pm
-- My wife will be very angry about me that the water is not at 32 degrees celsius in the afternoon :)
+Basically, I expected that the heater stops if I press the pump button, but the unit works that way, that the board gives a 'I will not let you' tone and continues heating and filtering. The logic expects that the human first presses the heater button to stop heating, and than it will let me stop the filter pump. OK, that makes it more easy for me. My thinking was: 
+- Cron starts the filter pump at 8:30am
+- My wife starts the heater later
+- Cron will stop the filter pump at e.g. 1pm
+- My wife will be very angry with me that the water is not at 38 degrees celsius in the afternoon :)
 
-But in case the heater is running and 1pm filter off will be reached the board quits the virtual button press with 'I will not let you' and the heating process and filter pump are continuing.
+But in case the heater is running and "1pm filter off" will be reached, the board quits the virtual button press with 'I will not let you' tone and the heating process and filter pump are continuing.
 
-For the GUI I decided to use a web page. THe benefit is that every device in the network is able to control the pool via browser. 
-Instead of writing a mobile app or something Python based, a web application can be started via a browser on any mobile or PC.
+For the GUI I decided to use a simple web page (there will be some improvement in the future, I guess). THe benefit is that every device in my home network is able to control the pool via browser. 
+Instead of writing a mobile app or something else, a web application can be managed via browser on any mobile or pc.
 
-For the web part, I'm using flask for now - even if it says every time not to use it for any productive environment :). 
-As I'm still in dev stage, I will ignore that information.
- 
-Next improvmemts for 'version 2' are to be able to see the water temperature, https and maybe to see some more states of the internal devices. 
-Also, an option to control the main fuse in front of the pool in case of a full power loss, etc. But all of this will come later.
+For the web part, I'm using flask for now. So, in case flask is not installed on your Pi, install it if you want to use Poolboy as it is.
 
-My apologies for any bad code. Please feel free to compress or modify where you think it makes sense for your environment. 
-At the moment, the Pool Boy project provides all I need. But this maybe will be seen totally different from your end. 
-Please feel free to get in contact in case you see any improvement inside the code.
+Next improvmemts for 'version 2' are to be able to see the water temperature (maybe), https and to see and control some more features of the unit.
+Also, an option to control the main fuse in front of the pool in case of a full power loss, etc. 
+Another improvement might be to control and read the main power button and the state of it. At the moment, the unit has to stay powered on to let cron control the filter pump. As there is no functionality to find out the main power state, there is no guarantee that the cron jobs are able to manage the unit. But all of this will come later somewhen ... somewhere.
 
-!!! Please be informed that I will not take over any waranty in case something will be damaged or in case something will not work as you expect it. 
-In case you'll use any script(s) of that project (or in parts) or something will become broken after opening the pool device, please don't come back to me.  !!!
+My apologies for any bad code, any mistakes you´ll find in the readme, or functionalities you are missing.
+Please feel free to change or modify the code for your needs. You are free to extend or modify any line of the code, but please don´t say or write somewhere or to anyone that Poolboy  is based on your idea or base.
 
+At the moment, the Poolboy project provides all that I need. But this maybe will be seen totally different from your end. 
+Please feel free to get in contact with me in case you see any improvement. 
+
+!!! Please be informed that I will not take over any waranty in case something will be damaged or in case something will not work as you´ll expect it. 
+In case you use any script or part of that project and you think that will compromise any part or piece of your infrastructure or something becomes broken after opening your pool device, please don't come back to me. !!!
+
+Before I describe what you´ll find where:
+- I know that this is not the smartest way to code, but as I said before: "It works for my needs", all script parts are based on folder structure "/opt/Poolboy". If you don´t like it, you have to touch several scripts.
+- The log files will not be created on it´s own. If you remove one of it, you have to create a fresh one after deletion.
+- All files and folders are in ownership of root:root. An own user might be enough for a lot of the funtionalities, but did not check it so far.
 
 What you'll find in the repository:
-- poolboy.service file can be used to add the flask webservice to the systemd autostart
-- server.py is the python script that will be used by the poolboy service / flask web service
-- folder static contains the Pool Boy picture of the web page
-- folder templates contains the html page of the Pool Boy web page
-- folder cronActions contains the two scripts to activate and deactivate the filter pump
-- folder manualActions contains some scripts to start/stop the other functions of the button board
-- there are some older server version files. The current/last one, which is similar to server.py is the file server_v1.2.py
+- file "poolboy.service" can be used to add the flask webservice to the systemd autostart. Please copy it to /etc/systemd/system/ and run:
+  + systemctl daemon-reload
+  + systemctl enable poolboy
+  + systemctl start poolboy
+- file "server.py" is the python script that will be managed by the poolboy service and flask service
+- folder "static" contains the Pool Boy picture of the web page
+- folder "templates" contains the html page of the Poolboy web page
+- folder "cronActions" contains the scripts to activate and deactivate the filter pump. It also contains a log file that provides the cron changes
+- folder "manualActions" contains some scripts to "press" the buttons via command line. Every time one of the scripts will be started. The corresponding relais will be activated and the condition will be written to sysout
+  + In case you want to run any of these scripts, please write "python" in front of it, e.g. "python /opt/Poolboy/manualActions/bubbles_rel1.py". 
+  + Just run the script again to switch the corresponding function again. 
+- there is one server version file that is a copy of the current server.py - just to prevent administative mistakes during changes of the original one. 
 - You are able to read these lines - so you found the README file ;)
-- the cron job scripts are logging to poolboy.log on the same folder level
-- the webpage server.py script should log also, but there are some issues with it at the moment
+. the webpage server.py script should log into poolboy_web.log, but there are some issues with it at the moment. 
+
+How to manage Poolboy via cron:
+I guess you know how, but please see the next two lines which you could use for your crontab:
+30 8 * * * /usr/bin/python /opt/Poolboy/cronActions/filter_on.py
+30 15 * * * /usr/bin/python /opt/Poolboy/cronActions/filter_off.py
+
+RasPi Pin layout which are configured in the scripts:
+Bubbles button - pin 40 -> connect to relais board, relais 1
+main power button - pin 38 -> connect to relais board, relais 2
+filter pump button - pin 36 -> connect to relais board, relais 3
+heater button - pin 32 -> connect to relais board, relais 4
+
+Furthermore, connect the relais board to 3,3v, 5v and ground to power and control the relais board.
+
+Last step, connect pin 31 via a pull-down circuit with the n/c contact of the 12v relais which will be powered via the relais that controls the heater circuit of the pool unit main board. Please not use or connect the 230v contacts of that relais. You need to use the 12v contacts which are powering the relais!!! Just to make it clear one more time.
+
+In general, the web page would work without the pin 31 circuit pieces. 
+But the indicator on the page will not switch between 0/1 to visualize the filter pump state. 
+On other hand, the cron scripts will not work properly as the scripts can´t read the running state of the pump. 
+
+That´s it. I hope you´ll enjoy my Poolboy.
+
+Cheers,
+Plat0nicS0lid
 
 
