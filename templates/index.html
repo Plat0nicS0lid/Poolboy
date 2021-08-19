@@ -2,6 +2,7 @@
 
 <head><title>Poolboy</title>
     <meta charset=utf-8>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <style>
                 table, th, td {
                         border: 1px solid black;
@@ -17,53 +18,56 @@
         <br>
 	<br>
         <br>
-        <table>
-                <tr>
-                <th>Main Power</th>
-                <th><button> <a href="/my-link1/">Relais 2</a></button></th>
+        <table width="80%">
+                <font face="Courier New" size="10">
+		<tr>
+                <th><font face="Courier New" size="10">Main Power</th>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link1/">Relais 2</a></button></th>
                 </tr>
 	</table>
 	<br>
-	<br>
-	<table>
+	<table width="80%">
 		<tr>
 		<th>Filterpumpe läuft:</th>
-		<td><b>"  {{ filterbutton }}  " </b></td>
+		<th><b>" {{ filterbutton }} "</b></th>
 		</tr>
 	</table>
 	<br>
-	<br>
-        <table>
+        <table width="80%">
                 <tr>
                 <th>Filtern</th>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link2/">Relais 1</a></button></th>
+		</tr>
+	</table>
+	<br>
+        <table width="80%">
+		<tr>
                 <th>Heizen</th>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link3/">Relais 3</a></button></th>
+		</tr>
+	</table>
+	<br>
+        <table width="80%">
+		<tr>
                 <th>Bubbles</th>
-                </tr>
-                <tr>
-                <td><button> <a href="/my-link2/">Relais 1</a></button></td>
-                <td><button> <a href="/my-link3/">Relais 3</a></button></td>
-                <td><button> <a href="/my-link4/">Relais 4</a></button></td>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link4/">Relais 4</a></button></th>
                 </tr>
         </table>
-	<br>
-	<br>
-	<table>
+	<br><br>
+	<table width="80%">
+    		<th>Wassertemperatur: </th>
+		<th><b>{{ temp }} Celsius</b></th> 
+	</table>
+	<br><br>
+	<table width="80%">
 		<tr>
                 <th>Temp +</th>
                 <th>Temp -</th>
                 </tr>
                 <tr>
-                <td><button> <a href="/my-link5/">Relais 5</a></button></td>
-                <td><button> <a href="/my-link6/">Relais 6</a></button></td>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link5/">Relais 5</a></button></th>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link6/">Relais 6</a></button></th>
                 </tr>
 	</table>
 	<br>
-<!--        <form action="/my-link/">
-            <input type="submit" value="Click me" />
-        </form>
-        <button> <a href="/my-link1/">Relais 1</a></button>
-        <button> <a href="/my-link2/">Relais 2</a></button>
-        <button> <a href="/my-link3/">Relais 3</a></button>
--->        
-
     </body>

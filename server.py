@@ -15,6 +15,7 @@ GPIO.setmode(GPIO.BOARD)
 	
 @app.route('/')
 def index():
+ #   return render_template('index.html', temp=f.read())
   GPIO.setmode(GPIO.BOARD)
   filterstat = 31
   buttonSts = GPIO.LOW
@@ -24,7 +25,8 @@ def index():
   templateData = {
     'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f: 
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link1/')
@@ -45,7 +47,8 @@ def my_link1():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 
@@ -67,7 +70,8 @@ def my_link2():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link3/')
@@ -88,7 +92,8 @@ def my_link3():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link4/')
@@ -109,7 +114,8 @@ def my_link4():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link5/')
@@ -130,7 +136,8 @@ def my_link5():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link6/')
@@ -151,7 +158,8 @@ def my_link6():
   templateData = {
   'filterbutton'  : buttonSts,
   }
-  return render_template('index.html', **templateData)
+  with open('temperature.txt', 'r') as f:
+    return render_template('index.html', temp=f.read(), **templateData)
   GPIO.cleanup()
 
 if __name__ == '__main__':
