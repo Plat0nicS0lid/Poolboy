@@ -10,64 +10,64 @@
         </style>
 </head>
 
-    <body>
-        <br>
-
-        <img src="/static/pictures/poolboy.png" alt="Poolboy">
-
-        <br>
+<body>
+	<button type="button"> <a href="/"> <img src="/static/pictures/poolboy.png" alt="Poolboy"></a></button>
 	<br>
-        <br>
-        <table width="80%">
-                <font face="Courier New" size="10">
-		<tr>
-                <th><font face="Courier New" size="10">Main Power</th>
-                <th><button> <font face="Arial" size="10"> <a href="/my-link1/">Relais 2</a></button></th>
-                </tr>
+	<table>
+		<tl><font face="Courier New" size="10">Wassertemperatur:</tl>
+		<tl><b> {{ temp }} Celsius</b></tl>
+                <br>
+		<tl><font face="Courier New" size="10">Raumtemperatur:</tl>
+		<tl><b>{{ roomtemp }} Celsius</b></tl>
 	</table>
 	<br>
-	<table width="80%">
-		<tr>
-		<th>Filterpumpe läuft:</th>
-		<th><b>" {{ filterbutton }} "</b></th>
-		</tr>
+
+	<table>
+		<th><font face="Courier New" size="10">Main Power</th>
+		<th><button> <font face="Arial" size="10"> <a href="/my-link1/">Click</a></button></th>
 	</table>
 	<br>
-        <table width="80%">
-                <tr>
+
+	<table>
+		<tl>Filterpumpe läuft</tl>
+		<tl><b>: {{ filterbutton }} </b></tl>
+	</table>
+	<table>
+		<tl>Heizung läuft</tl>
+		<tl><b>: {{ heaterbutton }} </b></tl>
+	</table>
+	<br>
+
+	<table>
                 <th>Filtern</th>
-                <th><button> <font face="Arial" size="10"> <a href="/my-link2/">Relais 1</a></button></th>
-		</tr>
+                <th><button> <font face="Arial" size="10"> <a href="/my-link2/">Click</a></button></th>
 	</table>
 	<br>
-        <table width="80%">
-		<tr>
-                <th>Heizen</th>
-                <th><button> <font face="Arial" size="10"> <a href="/my-link3/">Relais 3</a></button></th>
-		</tr>
+
+	<table>
+		<th>Heizen</th>
+		<th><button> <font face="Arial" size="10"> <a href="/my-link3/">Click</a></button></th>
 	</table>
 	<br>
-        <table width="80%">
-		<tr>
+
+	<table>
                 <th>Bubbles</th>
-                <th><button> <font face="Arial" size="10"> <a href="/my-link4/">Relais 4</a></button></th>
-                </tr>
-        </table>
-	<br><br>
-	<table width="80%">
-    		<th>Wassertemperatur: </th>
-		<th><b>{{ temp }} Celsius</b></th> 
+                <th><button> <font face="Arial" size="10"> <a href="/my-link4/">Click</a></button></th>
 	</table>
-	<br><br>
-	<table width="80%">
-		<tr>
-                <th>Temp +</th>
+	<br>
+
+	<table>
+		<tl>Wunschtemperatur:</tl>
+		<tl><b> {{ wishtemp }} Celsius</b></tl>
+	</table>
+	<br>
+
+	<table>
+		<th>Temp +</th>
                 <th>Temp -</th>
-                </tr>
                 <tr>
                 <th><button> <font face="Arial" size="10"> <a href="/my-link5/">Relais 5</a></button></th>
                 <th><button> <font face="Arial" size="10"> <a href="/my-link6/">Relais 6</a></button></th>
-                </tr>
 	</table>
 	<br>
     </body>

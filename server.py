@@ -7,7 +7,7 @@ app = Flask(__name__, static_url_path='/static')
 
 #app.run(host='0.0.0.0')
 
-sys.stdout = open('/opt/Poolboy/poolboy_web.log', 'w')
+sys.stdout = open('poolboy_web.log', 'w')
 print ('Poolboy webapp started')
 
 GPIO.setmode(GPIO.BOARD)
@@ -15,18 +15,23 @@ GPIO.setmode(GPIO.BOARD)
 	
 @app.route('/')
 def index():
- #   return render_template('index.html', temp=f.read())
   GPIO.setmode(GPIO.BOARD)
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
   GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-    'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f: 
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f: 
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link1/')
@@ -40,15 +45,21 @@ def my_link1():
   GPIO.output(38,GPIO.HIGH)
   print("Relais 1 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 
@@ -63,15 +74,21 @@ def my_link2():
   GPIO.output(36,GPIO.HIGH)
   print("Relais 2 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link3/')
@@ -85,15 +102,21 @@ def my_link3():
   GPIO.output(32,GPIO.HIGH)
   print("Relais 3 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link4/')
@@ -107,15 +130,21 @@ def my_link4():
   GPIO.output(40,GPIO.HIGH)
   print("Relais 4 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link5/')
@@ -129,15 +158,21 @@ def my_link5():
   GPIO.output(35,GPIO.HIGH)
   print("Relais 5 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 @app.route('/my-link6/')
@@ -151,15 +186,21 @@ def my_link6():
   GPIO.output(37,GPIO.HIGH)
   print("Relais 6 OFF !")
   filterstat = 31
+  heaterstat = 29
   buttonSts = GPIO.LOW
+  heaterSts = GPIO.LOW
   # Read Sensors Status
-  GPIO.setup(filterstat, GPIO.IN)
+  GPIO.setup(filterstat, GPIO.IN)   
+  GPIO.setup(heaterstat, GPIO.IN)
   buttonSts = GPIO.input(filterstat)
+  filterSts = GPIO.input(heaterstat)
   templateData = {
-  'filterbutton'  : buttonSts,
+    'filterbutton'  : buttonSts, 'heaterbutton'  : filterSts, 
   }
-  with open('temperature.txt', 'r') as f:
-    return render_template('index.html', temp=f.read(), **templateData)
+  with open('temp_water.txt', 'r') as f:
+    with open('temp_air.txt', 'r') as g:
+      with open('temp_wish.txt', 'r') as w:
+        return render_template('index.html', wishtemp=w.read(), roomtemp=g.read(), temp=f.read(), **templateData)
   GPIO.cleanup()
 
 if __name__ == '__main__':
